@@ -5,7 +5,7 @@ RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
 RepositorioRevista repositorioRevista = new RepositorioRevista();
 
 TelaCaixa telaCaixa = new TelaCaixa(repositorioCaixa);
-TelaRevista telaRevista = new TelaRevista(repositorioRevista);
+TelaRevista telaRevista = new TelaRevista(repositorioRevista, telaCaixa, repositorioCaixa);
 
 while (true)
 {

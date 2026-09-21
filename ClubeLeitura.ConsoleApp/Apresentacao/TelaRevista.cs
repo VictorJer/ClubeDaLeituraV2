@@ -1,14 +1,18 @@
+using ClubeLeitura.ConsoleApp.Dominio;
 using ClubeLeitura.ConsoleApp.Intraestrutura;
 namespace ClubeLeitura.ConsoleApp.Apresentacao;
 
 public class TelaRevista
 {
+    RepositorioCaixa repositorioCaixa;
     private RepositorioRevista repositorioRevista;
     private TelaCaixa telaCaixa;
 
-    public TelaRevista(RepositorioRevista repositorioRevista, TelaCaixa telaCaixa)
+    public TelaRevista(RepositorioRevista repositorioRevista, TelaCaixa telaCaixa, RepositorioCaixa repositorioCaixa)
     {
         this.repositorioRevista = repositorioRevista;
+        this.telaCaixa = telaCaixa;
+        this.repositorioCaixa = repositorioCaixa;
         this.telaCaixa = telaCaixa;
     }
 
@@ -34,12 +38,73 @@ public class TelaRevista
 
     public void CadastrarRevista()
     {
-        throw new NotImplementedException();
+        Revista revista = ObterDadosCadastrais();
+
+        var erros = revista.Validar();
+
+        if (erros.Length > 0)
+        {
+            for (int i = 0; i < erros.Length; i++)
+            {
+                Console.WriteLine(erros[i]);
+            }
+
+            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.ReadLine();
+            CadastrarRevista();
+            return;
+        }
+
+        var result = repositorioRevista.Cadastrar(revista);
+
+        if (result)
+        {
+            Console.WriteLine("Revista cadastrada com sucesso!");
+            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.ReadLine();
+        }
+        else
+        {
+            Console.WriteLine("Não foi possível cadastrar a revista. Limite atingido.");
+            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.ReadLine();
+        }
     }
 
     public void EditarRevista()
     {
-        throw new NotImplementedException();
+        Revista revista = ObterDadosCadastrais();
+
+        var erros = revista.Validar();
+
+        if (erros.Length > 0)
+        {
+            for (int i = 0; i < erros.Length; i++)
+            {
+                Console.WriteLine(erros[i]);
+            }
+
+            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.ReadLine();
+            EditarRevista();
+            return;
+        }
+
+        var result = repositorioRevista.Editar(revista.Id, revista);
+
+        if (result)
+        {
+            Console.WriteLine("Revista editada com sucesso!");
+            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.ReadLine();
+        }
+        else
+        {
+            Console.WriteLine("Não foi possível editar a revista.");
+            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.ReadLine();
+        }
+
     }
 
     public void ExcluirRevista()
@@ -50,5 +115,30 @@ public class TelaRevista
     public void VisualizarRevistas(bool Continuar)
     {
         throw new NotImplementedException();
+    }
+
+    public Revista ObterDadosCadastrais()
+    {
+        string titulo = string.Empty;
+        string numeroEdicao = string.Empty;
+        string dataPublicacao = string.Empty;
+        string valor = string.Empty;
+
+        Console.Write("Título: ");
+        titulo = Console.ReadLine() ?? string.Empty;
+
+        Console.Write("Número da edição: ");
+        numeroEdicao = Console.ReadLine() ?? string.Empty;
+
+        Console.Write("Data de publicação: ");
+        dataPublicacao = Console.ReadLine() ?? string.Empty;
+
+        telaCaixa.VisualizarCaixas(false);
+        Console.Write("ID da caixa: ");
+        string idCaixa = Console.ReadLine() ?? string.Empty;
+
+        Caixa caixa = repositorioCaixa.SelecionarPorId(idCaixa);
+
+        return new Revista(titulo, numeroEdicao, dataPublicacao, caixa);
     }
 }
