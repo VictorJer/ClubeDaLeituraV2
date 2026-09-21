@@ -33,4 +33,23 @@ public class RepositorioRevista
 
         return false;
     }
+
+    internal bool Excluir(string idSelecionado)
+    {
+        for (int i = 0; i < revistas.Length; i++)
+        {
+            if (revistas[i] != null && revistas[i].Id == idSelecionado)
+            {
+                revistas[i] = null;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    internal Revista[] SelecionarTodos()
+    {
+        return revistas;
+    }
 }
