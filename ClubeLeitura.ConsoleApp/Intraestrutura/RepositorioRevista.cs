@@ -26,7 +26,7 @@ public class RepositorioRevista
         {
             if (revistas[i] != null && revistas[i].Id == id)
             {
-                revistas[i].AtualizarRevista(revista);
+                revistas[i].Atualizar(revista);
                 return true;
             }
         }

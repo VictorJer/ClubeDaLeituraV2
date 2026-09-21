@@ -1,6 +1,7 @@
 using ClubeLeitura.ConsoleApp.Dominio;
+using ClubeLeitura.ConsoleApp.Intraestrutura;
 
-public class RepositorioCaixa
+public class RepositorioCaixa : RepositorioBase
 {
     private Caixa[] caixas = new Caixa[100];
 
@@ -24,7 +25,7 @@ public class RepositorioCaixa
 
         if (caixaExistente != null)
         {
-            caixaExistente.AtualizarCaixa(caixaAtualizada);
+            caixaExistente.Atualizar(caixaAtualizada);
             return true;
         }
 

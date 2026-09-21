@@ -2,9 +2,8 @@ using System.Security.Cryptography;
 
 namespace ClubeLeitura.ConsoleApp.Dominio;
 
-public class Revista
+public class Revista : EntidadeBase
 {
-    public string Id { get; set; } = string.Empty;
     public string Titulo { get; set; } = string.Empty;
     public string NumeroEdicao { get; set; } = string.Empty;
     public string AnoPublicacao { get; set; } = string.Empty;
@@ -12,26 +11,23 @@ public class Revista
 
     public Revista(string titulo, string numeroEdicao, string anoPublicacao, Caixa caixa)
     {
-        Id = Convert
-        .ToHexString(RandomNumberGenerator.GetBytes(20))
-        .ToLower()
-        .Substring(0, 7);
-
         Titulo = titulo;
         NumeroEdicao = numeroEdicao;
         AnoPublicacao = anoPublicacao;
         Caixa = caixa;
     }
 
-    public void AtualizarRevista(Revista revistaAtualizada)
+    public override void Atualizar(EntidadeBase entidadeAtualizada)
     {
+        Revista revistaAtualizada = (Revista)entidadeAtualizada;
+
         Titulo = revistaAtualizada.Titulo;
         NumeroEdicao = revistaAtualizada.NumeroEdicao;
         AnoPublicacao = revistaAtualizada.AnoPublicacao;
         Caixa = revistaAtualizada.Caixa;
     }
 
-    public string[] Validar()
+    public override string[] Validar()
     {
         string erros = string.Empty;
 
