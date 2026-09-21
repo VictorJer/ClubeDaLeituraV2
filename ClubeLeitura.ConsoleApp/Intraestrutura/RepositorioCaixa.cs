@@ -44,4 +44,9 @@ public class RepositorioCaixa
 
         return null;
     }
+
+    public Caixa[] SelecionarTodos()
+    {
+        return caixas;
+    }
 }

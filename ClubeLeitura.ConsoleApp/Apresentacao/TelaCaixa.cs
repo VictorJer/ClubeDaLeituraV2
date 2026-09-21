@@ -53,7 +53,12 @@ public class TelaCaixa
     public void EditarCaixa()
     {
         Cabesalho("Edição de caixa de revista");
+
+        Caixa caixaAtualizada = ObterDadosCadastrais();
+
         string idSelecionado = string.Empty;
+
+        VisualizarCaixas();
 
         while (true)
         {
@@ -68,16 +73,66 @@ public class TelaCaixa
 
             break;
         }
+
+        var result = repositorioCaixa.Editar(idSelecionado, caixaAtualizada);
+
+        if (result)
+        {
+            Console.WriteLine("Caixa editada com sucesso!");
+            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.ReadLine();
+        }
+        else
+        {
+            Console.WriteLine("Não foi possível editar a caixa. ID não encontrado.");
+            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.ReadLine();
+        }
     }
 
     public void ExcluirCaixa()
     {
         Cabesalho("Exclusão de caixa de revista");
+
+        string idSelecionado = string.Empty;
+
+        while (true)
+        {
+            Console.WriteLine("Digite o ID da caixa que deseja excluir: ");
+            idSelecionado = Console.ReadLine() ?? string.Empty;
+
+            if (string.IsNullOrWhiteSpace(idSelecionado))
+            {
+                Console.WriteLine("O ID não pode ser vazio. Por favor, digite novamente.");
+                continue;
+            }
+
+            break;
+        }
     }
 
     public void VisualizarCaixas()
     {
         Cabesalho("Visualização de caixas de revistas");
+
+        Caixa[] caixas = repositorioCaixa.SelecionarTodos();
+
+        if (caixas.Length == 0)
+        {
+            Console.WriteLine("Nenhuma caixa cadastrada.");
+            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.ReadLine();
+            return;
+        }
+
+        Console.WriteLine("{0,-10} | {1,-20} | {2,-10} | {3,-15}",
+                             "ID", "Etiqueta", "Cor", "Dias de Empréstimo");
+
+        for (int i = 0; i < caixas.Length; i++)
+        {
+            Console.WriteLine("{0,-10} | {1,-20} | {2,-10} | {3,-15}",
+                              caixas[i].Id, caixas[i].Etiqueta, caixas[i].Cor, caixas[i].DiasEmprestimo);
+        }
     }
 
     private Caixa ObterDadosCadastrais()
