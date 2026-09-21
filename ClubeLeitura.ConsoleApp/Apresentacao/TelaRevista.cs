@@ -139,13 +139,16 @@ public class TelaRevista
         Console.WriteLine("{0,-10} | {1,-20} | {2,-15} | {3,-15} | {4,-10}",
                         "ID", "Título", "Número Edição", "Ano Publicação", "Caixa");
 
-        Revista[] revistas = repositorioRevista.SelecionarTodos();
+        EntidadeBase?[] revistas = repositorioRevista.SelecionarTodos();
+
         for (int i = 0; i < revistas.Length; i++)
         {
+            Revista? revista = (Revista?)revistas[i];
+
             if (revistas[i] != null)
             {
                 Console.WriteLine("{0,-10} | {1,-20} | {2,-15} | {3,-15} | {4,-10}",
-                            revistas[i].Id, revistas[i].Titulo, revistas[i].NumeroEdicao, revistas[i].AnoPublicacao, revistas[i].Caixa.Etiqueta);
+                            revista.Id, revista.Titulo, revista.NumeroEdicao, revista.AnoPublicacao, revista.Caixa.Etiqueta);
             }
         }
 
@@ -176,7 +179,9 @@ public class TelaRevista
         Console.Write("ID da caixa: ");
         string idCaixa = Console.ReadLine() ?? string.Empty;
 
-        Caixa caixa = repositorioCaixa.SelecionarPorId(idCaixa);
+        EntidadeBase? caixaSelecionada = repositorioCaixa.SelecionarPorId(idCaixa);
+
+        Caixa caixa = (Caixa?)caixaSelecionada;
 
         return new Revista(titulo, numeroEdicao, dataPublicacao, caixa);
     }

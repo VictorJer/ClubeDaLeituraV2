@@ -139,14 +139,27 @@ public class TelaCaixa
             break;
         }
 
-        repositorioCaixa.Excluir(idSelecionado);
+        var result = repositorioCaixa.Excluir(idSelecionado);
+
+        if (result)
+        {
+            Console.WriteLine("Caixa excluída com sucesso!");
+            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.ReadLine();
+        }
+        else
+        {
+            Console.WriteLine("Não foi possível excluir a caixa. ID não encontrado.");
+            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.ReadLine();
+        }
     }
 
     public void VisualizarCaixas(bool aguardar)
     {
         Cabesalho("Visualização de caixas de revistas");
 
-        Caixa[] caixas = repositorioCaixa.SelecionarTodos();
+        EntidadeBase?[] caixas = repositorioCaixa.SelecionarTodos();
 
         if (caixas.Length == 0)
         {
@@ -161,11 +174,13 @@ public class TelaCaixa
 
         for (int i = 0; i < caixas.Length; i++)
         {
+            Caixa caixa = (Caixa?)caixas[i];
+
             if (caixas[i] == null)
                 continue;
 
             Console.WriteLine("{0,-10} | {1,-20} | {2,-10} | {3,-15}",
-                              caixas[i].Id, caixas[i].Etiqueta, caixas[i].Cor, caixas[i].DiasEmprestimo);
+                              caixa.Id, caixa.Etiqueta, caixa.Cor, caixa.DiasEmprestimo);
         }
 
         if (aguardar)
