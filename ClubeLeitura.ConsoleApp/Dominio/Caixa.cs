@@ -28,5 +28,28 @@ public class Caixa
         DiasEmprestimo = caixaAtualizada.DiasEmprestimo;
     }
 
+    public string[] Validar()
+    {
+        string erros = string.Empty;
 
+        if (string.IsNullOrWhiteSpace(Etiqueta))
+            erros += "A etiqueta da caixa não pode ser vazia.;";
+
+        if (Etiqueta.Length < 3)
+            erros += "A etiqueta da caixa deve ter pelo menos 3 caracteres.;";
+
+        if (Etiqueta.Length > 50)
+            erros += "A etiqueta da caixa não pode ter mais de 50 caracteres.;";
+
+        if (string.IsNullOrWhiteSpace(Cor))
+            erros += "A cor da caixa não pode ser vazia.;";
+
+        if (DiasEmprestimo <= 0)
+            erros += "O número de dias de empréstimo deve ser um valor positivo.;";
+
+        if (DiasEmprestimo > 30)
+            erros += "O número de dias de empréstimo não pode ser maior que 30.;";
+
+        return erros.Split(";", StringSplitOptions.RemoveEmptyEntries);
+    }
 }

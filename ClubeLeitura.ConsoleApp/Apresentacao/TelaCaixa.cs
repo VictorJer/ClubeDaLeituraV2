@@ -34,6 +34,21 @@ public class TelaCaixa
 
         Caixa novaCaixa = ObterDadosCadastrais();
 
+        string[] erros = novaCaixa.Validar();
+
+        if (erros.Length > 0)
+        {
+            for (int i = 0; i < erros.Length; i++)
+            {
+                Console.WriteLine(erros[i]);
+            }
+
+            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.ReadLine();
+            CadastrarCaixa();
+            return;
+        }
+
         var result = repositorioCaixa.Cadastrar(novaCaixa);
 
         if (result)
@@ -72,6 +87,19 @@ public class TelaCaixa
 
         Caixa caixaAtualizada = ObterDadosCadastrais();
 
+        string[] erros = caixaAtualizada.Validar();
+        if (erros.Length > 0)
+        {
+            for (int i = 0; i < erros.Length; i++)
+            {
+                Console.WriteLine(erros[i]);
+            }
+
+            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.ReadLine();
+            EditarCaixa();
+            return;
+        }
 
         var result = repositorioCaixa.Editar(idSelecionado, caixaAtualizada);
 
