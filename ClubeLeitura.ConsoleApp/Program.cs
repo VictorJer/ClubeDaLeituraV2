@@ -1,8 +1,11 @@
 ﻿using ClubeLeitura.ConsoleApp.Apresentacao;
+using ClubeLeitura.ConsoleApp.Intraestrutura;
 
 RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
+RepositorioRevista repositorioRevista = new RepositorioRevista();
 
 TelaCaixa telaCaixa = new TelaCaixa(repositorioCaixa);
+TelaRevista telaRevista = new TelaRevista(repositorioRevista);
 
 while (true)
 {
@@ -61,7 +64,32 @@ while (true)
 
         else if (opcaoMenuPrincipal == "2")
         {
+            opcaoMenuInterno = telaRevista.ObterOpcaoMenu();
 
+            if (opcaoMenuInterno == "S")
+                break;
+
+            switch (opcaoMenuInterno)
+            {
+                case ("1")
+                    :
+                    telaRevista.CadastrarRevista();
+                    break;
+                case ("2")
+                    :
+                    telaRevista.EditarRevista();
+                    break;
+
+                case ("3")
+                    :
+                    telaRevista.ExcluirRevista();
+                    break;
+
+                case ("4")
+                    :
+                    telaRevista.VisualizarRevistas(true);
+                    break;
+            }
         }
 
         else if (opcaoMenuPrincipal == "3")
