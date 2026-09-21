@@ -2,8 +2,7 @@
 
 RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
 
-TelaCaixa telaCaixa = new TelaCaixa();
-telaCaixa.repositorioCaixa = repositorioCaixa;
+TelaCaixa telaCaixa = new TelaCaixa(repositorioCaixa);
 
 while (true)
 {

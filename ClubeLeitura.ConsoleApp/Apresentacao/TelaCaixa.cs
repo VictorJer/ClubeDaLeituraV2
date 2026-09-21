@@ -4,7 +4,12 @@ namespace ClubeLeitura.ConsoleApp.Apresentacao;
 
 public class TelaCaixa
 {
-    public RepositorioCaixa repositorioCaixa;
+    private RepositorioCaixa repositorioCaixa;
+
+    public TelaCaixa(RepositorioCaixa repositorioCaixa)
+    {
+        this.repositorioCaixa = repositorioCaixa;
+    }
     public string ObterOpcaoMenu()
     {
         Console.Clear();
@@ -27,8 +32,59 @@ public class TelaCaixa
     {
         Cabesalho("Cadastro de caixa de revista");
 
+        Caixa novaCaixa = ObterDadosCadastrais();
+
+        var result = repositorioCaixa.Cadastrar(novaCaixa);
+
+        if (result)
+        {
+            Console.WriteLine("Caixa cadastrada com sucesso!");
+            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.ReadLine();
+        }
+        else
+        {
+            Console.WriteLine("Não foi possível cadastrar a caixa. Limite de caixas atingido.");
+            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.ReadLine();
+        }
+    }
+
+    public void EditarCaixa()
+    {
+        Cabesalho("Edição de caixa de revista");
+        string idSelecionado = string.Empty;
+
+        while (true)
+        {
+            Console.WriteLine("Digite o ID da caixa que deseja editar: ");
+            idSelecionado = Console.ReadLine() ?? string.Empty;
+
+            if (string.IsNullOrWhiteSpace(idSelecionado))
+            {
+                Console.WriteLine("O ID não pode ser vazio. Por favor, digite novamente.");
+                continue;
+            }
+
+            break;
+        }
+    }
+
+    public void ExcluirCaixa()
+    {
+        Cabesalho("Exclusão de caixa de revista");
+    }
+
+    public void VisualizarCaixas()
+    {
+        Cabesalho("Visualização de caixas de revistas");
+    }
+
+    private Caixa ObterDadosCadastrais()
+    {
         string Etiqueta = string.Empty;
         string Cor = string.Empty;
+        int diasEmprestimo = 7;
 
         while (true)
         {
@@ -77,24 +133,20 @@ public class TelaCaixa
             break;
         }
 
-        Caixa caixa = new Caixa(Etiqueta, Cor);
+        while (true)
+        {
+            Console.WriteLine("Digite a quantidade de dias para empréstimo (padrão é 7): ");
+            diasEmprestimo = Convert.ToInt32(Console.ReadLine());
+            if (diasEmprestimo <= 0)
+            {
+                Console.WriteLine("A quantidade de dias de empréstimo deve ser um número inteiro positivo. Por favor, digite novamente.");
+                continue;
+            }
+            break;
+        }
 
-
-    }
-
-    public void EditarCaixa()
-    {
-        Cabesalho("Edição de caixa de revista");
-    }
-
-    public void ExcluirCaixa()
-    {
-        Cabesalho("Exclusão de caixa de revista");
-    }
-
-    public void VisualizarCaixas()
-    {
-        Cabesalho("Visualização de caixas de revistas");
+        Caixa novaCaixa = new Caixa(Etiqueta, Cor, diasEmprestimo);
+        return novaCaixa;
     }
 
     public void Cabesalho(string titulo)
