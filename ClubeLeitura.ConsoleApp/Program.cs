@@ -1,4 +1,11 @@
-﻿while (true)
+﻿using ClubeLeitura.ConsoleApp.Apresentacao;
+
+RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
+
+TelaCaixa telaCaixa = new TelaCaixa();
+telaCaixa.repositorioCaixa = repositorioCaixa;
+
+while (true)
 {
     Console.Clear();
     Console.WriteLine("---------------------------------");
@@ -25,7 +32,32 @@
 
         if (opcaoMenuPrincipal == "1")
         {
+            opcaoMenuInterno = telaCaixa.ObterOpcaoMenu();
 
+            if (opcaoMenuInterno == "S")
+                break;
+
+            switch (opcaoMenuInterno)
+            {
+                case ("1")
+                    :
+                    telaCaixa.CadastrarCaixa();
+                    break;
+                case ("2")
+                    :
+                    telaCaixa.EditarCaixa();
+                    break;
+
+                case ("3")
+                    :
+                    telaCaixa.ExcluirCaixa();
+                    break;
+
+                case ("4")
+                    :
+                    telaCaixa.VisualizarCaixas();
+                    break;
+            }
         }
 
         else if (opcaoMenuPrincipal == "2")
