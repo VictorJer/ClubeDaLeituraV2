@@ -20,13 +20,12 @@ public class RepositorioCaixa
 
     public bool Editar(string idSelecionado, Caixa caixaAtualizada)
     {
-        for (int i = 0; i < caixas.Length; i++)
+        var caixaExistente = SelecionarPorId(idSelecionado);
+
+        if (caixaExistente != null)
         {
-            if (caixas[i] != null && caixas[i].Id == idSelecionado)
-            {
-                caixas[i] = caixaAtualizada;
-                return true;
-            }
+            caixaExistente.AtualizarCaixa(caixaAtualizada);
+            return true;
         }
 
         return false;
@@ -48,5 +47,17 @@ public class RepositorioCaixa
     public Caixa[] SelecionarTodos()
     {
         return caixas;
+    }
+
+    internal void Excluir(string idSelecionado)
+    {
+        for (int i = 0; i < caixas.Length; i++)
+        {
+            if (caixas[i] != null && caixas[i].Id == idSelecionado)
+            {
+                caixas[i] = null;
+                break;
+            }
+        }
     }
 }

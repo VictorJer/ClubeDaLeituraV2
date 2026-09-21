@@ -96,6 +96,8 @@ public class TelaCaixa
 
         string idSelecionado = string.Empty;
 
+        VisualizarCaixas();
+
         while (true)
         {
             Console.WriteLine("Digite o ID da caixa que deseja excluir: ");
@@ -109,6 +111,8 @@ public class TelaCaixa
 
             break;
         }
+
+        repositorioCaixa.Excluir(idSelecionado);
     }
 
     public void VisualizarCaixas()
@@ -130,6 +134,9 @@ public class TelaCaixa
 
         for (int i = 0; i < caixas.Length; i++)
         {
+            if (caixas[i] == null)
+                continue;
+
             Console.WriteLine("{0,-10} | {1,-20} | {2,-10} | {3,-15}",
                               caixas[i].Id, caixas[i].Etiqueta, caixas[i].Cor, caixas[i].DiasEmprestimo);
         }
