@@ -27,4 +27,6 @@ public class Caixa
         Cor = caixaAtualizada.Cor;
         DiasEmprestimo = caixaAtualizada.DiasEmprestimo;
     }
+
+
 }

@@ -54,7 +54,7 @@ while (true)
 
                 case ("4")
                     :
-                    telaCaixa.VisualizarCaixas();
+                    telaCaixa.VisualizarCaixas(true);
                     break;
             }
         }

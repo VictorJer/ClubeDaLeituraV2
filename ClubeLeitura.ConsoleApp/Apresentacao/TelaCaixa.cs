@@ -53,13 +53,9 @@ public class TelaCaixa
     public void EditarCaixa()
     {
         Cabesalho("Edição de caixa de revista");
-
-        Caixa caixaAtualizada = ObterDadosCadastrais();
-
         string idSelecionado = string.Empty;
 
-        VisualizarCaixas();
-
+        VisualizarCaixas(false);
         while (true)
         {
             Console.WriteLine("Digite o ID da caixa que deseja editar: ");
@@ -73,6 +69,9 @@ public class TelaCaixa
 
             break;
         }
+
+        Caixa caixaAtualizada = ObterDadosCadastrais();
+
 
         var result = repositorioCaixa.Editar(idSelecionado, caixaAtualizada);
 
@@ -96,7 +95,7 @@ public class TelaCaixa
 
         string idSelecionado = string.Empty;
 
-        VisualizarCaixas();
+        VisualizarCaixas(false);
 
         while (true)
         {
@@ -115,7 +114,7 @@ public class TelaCaixa
         repositorioCaixa.Excluir(idSelecionado);
     }
 
-    public void VisualizarCaixas()
+    public void VisualizarCaixas(bool aguardar)
     {
         Cabesalho("Visualização de caixas de revistas");
 
@@ -139,6 +138,12 @@ public class TelaCaixa
 
             Console.WriteLine("{0,-10} | {1,-20} | {2,-10} | {3,-15}",
                               caixas[i].Id, caixas[i].Etiqueta, caixas[i].Cor, caixas[i].DiasEmprestimo);
+        }
+
+        if (aguardar)
+        {
+            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.ReadLine();
         }
     }
 
