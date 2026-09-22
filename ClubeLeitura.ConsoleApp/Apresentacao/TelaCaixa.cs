@@ -2,7 +2,7 @@ using ClubeLeitura.ConsoleApp.Dominio;
 
 namespace ClubeLeitura.ConsoleApp.Apresentacao;
 
-public class TelaCaixa
+public class TelaCaixa : TelaBase
 {
     private RepositorioCaixa repositorioCaixa;
 
@@ -53,15 +53,11 @@ public class TelaCaixa
 
         if (result)
         {
-            Console.WriteLine("Caixa cadastrada com sucesso!");
-            Console.WriteLine("Pressione ENTER para continuar...");
-            Console.ReadLine();
+            ExibirMensagem("Caixa cadastrada com sucesso!");
         }
         else
         {
-            Console.WriteLine("Não foi possível cadastrar a caixa. Limite de caixas atingido.");
-            Console.WriteLine("Pressione ENTER para continuar...");
-            Console.ReadLine();
+            ExibirMensagem("Não foi possível cadastrar a caixa. ID já existente.");
         }
     }
 
@@ -105,15 +101,11 @@ public class TelaCaixa
 
         if (result)
         {
-            Console.WriteLine("Caixa editada com sucesso!");
-            Console.WriteLine("Pressione ENTER para continuar...");
-            Console.ReadLine();
+            ExibirMensagem("Caixa editada com sucesso!");
         }
         else
         {
-            Console.WriteLine("Não foi possível editar a caixa. ID não encontrado.");
-            Console.WriteLine("Pressione ENTER para continuar...");
-            Console.ReadLine();
+            ExibirMensagem("Não foi possível editar a caixa. ID não encontrado.");
         }
     }
 
@@ -143,15 +135,11 @@ public class TelaCaixa
 
         if (result)
         {
-            Console.WriteLine("Caixa excluída com sucesso!");
-            Console.WriteLine("Pressione ENTER para continuar...");
-            Console.ReadLine();
+            ExibirMensagem("Caixa excluída com sucesso!");
         }
         else
         {
-            Console.WriteLine("Não foi possível excluir a caixa. ID não encontrado.");
-            Console.WriteLine("Pressione ENTER para continuar...");
-            Console.ReadLine();
+            ExibirMensagem("Não foi possível excluir a caixa. ID não encontrado.");
         }
     }
 
@@ -259,13 +247,5 @@ public class TelaCaixa
         return novaCaixa;
     }
 
-    public void Cabesalho(string titulo)
-    {
-        Console.Clear();
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine("Clube da Leitura");
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine(titulo);
-        Console.WriteLine("---------------------------------");
-    }
+
 }
