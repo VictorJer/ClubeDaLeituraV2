@@ -43,21 +43,21 @@ while (true)
             {
                 case ("1")
                     :
-                    telaCaixa.CadastrarCaixa();
+                    telaCaixa.Cadastrar();
                     break;
                 case ("2")
                     :
-                    telaCaixa.EditarCaixa();
+                    telaCaixa.Editar();
                     break;
 
                 case ("3")
                     :
-                    telaCaixa.ExcluirCaixa();
+                    telaCaixa.Excluir();
                     break;
 
                 case ("4")
                     :
-                    telaCaixa.VisualizarCaixas(true);
+                    telaCaixa.VisualizarTodos(true);
                     break;
             }
         }
@@ -73,21 +73,21 @@ while (true)
             {
                 case ("1")
                     :
-                    telaRevista.CadastrarRevista();
+                    telaRevista.Cadastrar();
                     break;
                 case ("2")
                     :
-                    telaRevista.EditarRevista();
+                    telaRevista.Editar();
                     break;
 
                 case ("3")
                     :
-                    telaRevista.ExcluirRevista();
+                    telaRevista.Excluir();
                     break;
 
                 case ("4")
                     :
-                    telaRevista.VisualizarRevistas(true);
+                    telaRevista.VisualizarTodos(true);
                     break;
             }
         }
