@@ -1,6 +1,6 @@
-using ClubeLeitura.ConsoleApp.Dominio;
+using ClubeLeitura.ConsoleApp.Dominio.Base;
 
-namespace ClubeLeitura.ConsoleApp.Intraestrutura;
+namespace ClubeLeitura.ConsoleApp.Intraestrutura.Base;
 
 public abstract class RepositorioBase
 {
