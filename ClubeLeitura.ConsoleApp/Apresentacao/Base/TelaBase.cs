@@ -3,7 +3,7 @@ using ClubeLeitura.ConsoleApp.Intraestrutura.Base;
 
 namespace ClubeLeitura.ConsoleApp.Apresentacao.Base
 {
-    public abstract class TelaBase
+    public abstract class TelaBase : ITela
     {
         public string nomeEntidade = string.Empty;
         private RepositorioBase repositorio;
@@ -26,9 +26,9 @@ namespace ClubeLeitura.ConsoleApp.Apresentacao.Base
             Console.WriteLine("S - Sair");
             Console.WriteLine("---------------------------------");
             Console.Write("> ");
-            string? opcaoMenuPrincipal = Console.ReadLine()?.ToUpper();
+            string? opcaoMenuInterno = Console.ReadLine()?.ToUpper();
 
-            return opcaoMenuPrincipal;
+            return opcaoMenuInterno;
         }
         public void Cadastrar()
         {

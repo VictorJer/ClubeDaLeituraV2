@@ -22,7 +22,17 @@ public class Emprestimo
             return DataEmprestimo.AddDays(Revista.Caixa.DiasEmprestimo);
         }
     }
-    public StatusEmprestimo Status { get; set; } = StatusEmprestimo.Aberto;
+    public bool EstaAtrasado
+    {
+        get
+        {
+            if (Status == StatusEmprestimo.Aberto && DateTime.Now > DataDevolucao)
+                return true;
+
+            return false;
+        }
+    }
+    public StatusEmprestimo Status { get; set; }
 
 
     public Emprestimo(Amigo amigo, Revista revista)
@@ -46,6 +56,12 @@ public class Emprestimo
         Amigo.AddEmprestimo(this);
     }
 
+    public void FecharEmprestimo()
+    {
+        Status = StatusEmprestimo.Fechado;
+        Revista.Devolver();
+    }
+
     public string[] Validar()
     {
         string erros = string.Empty;
@@ -58,4 +74,6 @@ public class Emprestimo
 
         return erros.Split(';', StringSplitOptions.RemoveEmptyEntries);
     }
+
+
 }

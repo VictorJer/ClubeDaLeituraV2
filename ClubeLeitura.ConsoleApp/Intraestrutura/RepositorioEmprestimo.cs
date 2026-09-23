@@ -14,4 +14,25 @@ public class RepositorioEmprestimo
             }
         }
     }
+
+    public Emprestimo?[] SelecionarTodos()
+    {
+        return emprestimos;
+    }
+
+    internal Emprestimo? SelecionarPorId(string idEmprestimo)
+    {
+        for (int i = 0; i < emprestimos.Length; i++)
+        {
+            if (emprestimos[i] == null)
+                continue;
+
+            if (emprestimos[i].Id == idEmprestimo)
+            {
+                return emprestimos[i];
+            }
+        }
+
+        return null;
+    }
 }

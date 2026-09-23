@@ -1,10 +1,11 @@
+using ClubeLeitura.ConsoleApp.Apresentacao.Base;
 using ClubeLeitura.ConsoleApp.Dominio;
 using ClubeLeitura.ConsoleApp.Dominio.Base;
 using ClubeLeitura.ConsoleApp.Intraestrutura;
 
 namespace ClubeLeitura.ConsoleApp.Apresentacao;
 
-public class TelaEmprestimo
+public class TelaEmprestimo : ITela
 {
     private RepositorioEmprestimo repositorioEmprestimo;
     private RepositorioAmigo repositorioAmigo;
@@ -16,7 +17,7 @@ public class TelaEmprestimo
         this.repositorioAmigo = repositorioAmigo;
         this.repositorioRevista = repositorioRevista;
     }
-    internal string ObterOpcaoMenu()
+    public string ObterOpcaoMenu()
     {
         Console.Clear();
         Console.WriteLine("---------------------------------");
@@ -54,6 +55,71 @@ public class TelaEmprestimo
         Console.WriteLine("Empréstimo aberto com sucesso!");
         Console.WriteLine("Pressione ENTER para continuar...");
         Console.ReadLine();
+    }
+
+    public void FecharEmprestimo()
+    {
+        Console.Clear();
+        Console.WriteLine("Fechamento de Empréstimos");
+        Console.WriteLine("-------------------------");
+        VisualizarTodos(continuar: false, exibirCabecalho: false);
+
+        do
+        {
+            Console.Write("Digite o ID do empréstimo que deseja fechar: ");
+            string idEmprestimo = Console.ReadLine() ?? string.Empty;
+
+            Emprestimo? emprestimoSelecionado = repositorioEmprestimo.SelecionarPorId(idEmprestimo);
+
+            if (emprestimoSelecionado != null)
+            {
+                emprestimoSelecionado.FecharEmprestimo();
+                Console.WriteLine("Empréstimo fechado com sucesso!");
+                Console.WriteLine("Pressione ENTER para continuar...");
+                Console.ReadLine();
+                return;
+            }
+
+            Console.WriteLine("Empréstimo não encontrado. Tente novamente.");
+        } while (true);
+    }
+
+    public void VisualizarTodos(bool continuar, bool exibirCabecalho)
+    {
+        Console.Clear();
+        if (exibirCabecalho)
+        {
+            Console.WriteLine("Visualização de Empréstimos");
+            Console.WriteLine("---------------------------");
+        }
+
+        Console.WriteLine("{0,-7} | {1,-20} | {2,-20} | {3,-15} | {4,-15} | {5,-10}",
+                            "ID", "Amigo", "Revista", "Data Empréstimo", "Data Devolução", "Status");
+
+        Emprestimo?[] emprestimos = repositorioEmprestimo.SelecionarTodos();
+
+        for (int i = 0; i < emprestimos.Length; i++)
+        {
+            if (emprestimos[i] == null)
+                continue;
+
+            if (emprestimos[i] != null)
+            {
+                if (emprestimos[i].EstaAtrasado)
+                {
+                    emprestimos[i].Status = StatusEmprestimo.Atrasado;
+                }
+
+                Console.WriteLine("{0,-7} | {1,-20} | {2,-20} | {3,-15} | {4,-15} | {5,-10}",
+                                    emprestimos[i].Id, emprestimos[i].Amigo.Nome, emprestimos[i].Revista.Titulo, emprestimos[i].DataEmprestimo.ToShortDateString(), emprestimos[i].DataDevolucao.ToShortDateString() ?? "", emprestimos[i].Status);
+            }
+        }
+
+        if (continuar)
+        {
+            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.ReadLine();
+        }
     }
 
     private Emprestimo ObterDadosCadastrais()
@@ -132,13 +198,4 @@ public class TelaEmprestimo
         }
     }
 
-    internal void FecharEmprestimo()
-    {
-        throw new NotImplementedException();
-    }
-
-    internal void VisualizarTodos()
-    {
-        throw new NotImplementedException();
-    }
 }
