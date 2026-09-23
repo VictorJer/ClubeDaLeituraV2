@@ -22,9 +22,9 @@ public class TelaEmprestimo
         Console.WriteLine("---------------------------------");
         Console.WriteLine("Clube da Leitura");
         Console.WriteLine("---------------------------------");
-        Console.WriteLine($"1 - Abrir empréstimo");
-        Console.WriteLine($"2 - Fechar empréstimo");
-        Console.WriteLine($"3 - Visualizar empréstimos");
+        Console.WriteLine("1 - Abrir empréstimo");
+        Console.WriteLine("2 - Fechar empréstimo");
+        Console.WriteLine("3 - Visualizar empréstimos");
         Console.WriteLine("S - Sair");
         Console.WriteLine("---------------------------------");
         Console.Write("> ");
@@ -132,4 +132,13 @@ public class TelaEmprestimo
         }
     }
 
+    internal void FecharEmprestimo()
+    {
+        throw new NotImplementedException();
+    }
+
+    internal void VisualizarTodos()
+    {
+        throw new NotImplementedException();
+    }
 }

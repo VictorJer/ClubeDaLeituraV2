@@ -146,7 +146,7 @@ while (true)
 
                 case ("3")
                     :
-                    telaEmprestimo.VisualizarTodos(true);
+                    telaEmprestimo.VisualizarTodos();
                     break;
             }
         }
