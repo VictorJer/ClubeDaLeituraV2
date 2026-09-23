@@ -1,8 +1,24 @@
+using ClubeLeitura.ConsoleApp.Apresentacao.Base;
+using ClubeLeitura.ConsoleApp.Intraestrutura;
+
 namespace ClubeLeitura.ConsoleApp.Apresentacao;
 
 public class TelaPrincipal
 {
-    public string? ApresentarMenuPrincipal()
+    private RepositorioAmigo repositorioAmigo;
+    private RepositorioCaixa repositorioCaixa;
+    private RepositorioRevista repositorioRevista;
+    private RepositorioEmprestimo repositorioEmprestimo;
+
+    public TelaPrincipal(RepositorioAmigo repositorioAmigo, RepositorioCaixa repositorioCaixa, RepositorioRevista repositorioRevista, RepositorioEmprestimo repositorioEmprestimo)
+    {
+        this.repositorioAmigo = repositorioAmigo;
+        this.repositorioCaixa = repositorioCaixa;
+        this.repositorioRevista = repositorioRevista;
+        this.repositorioEmprestimo = repositorioEmprestimo;
+    }
+
+    public TelaBase? ApresentarMenuPrincipal()
     {
         Console.Clear();
         Console.WriteLine("---------------------------------");
@@ -17,6 +33,15 @@ public class TelaPrincipal
         Console.Write("> ");
         string? opcaoMenuPrincipal = Console.ReadLine()?.ToUpper();
 
-        return opcaoMenuPrincipal;
+        if (opcaoMenuPrincipal == "1")
+            return new TelaCaixa(repositorioCaixa);
+
+        else if (opcaoMenuPrincipal == "2")
+            return new TelaRevista(repositorioRevista, repositorioCaixa);
+
+        else if (opcaoMenuPrincipal == "3")
+            return new TelaAmigo(repositorioAmigo);
+
+        return null;
     }
 }

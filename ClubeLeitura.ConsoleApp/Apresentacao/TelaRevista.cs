@@ -8,14 +8,11 @@ public class TelaRevista : TelaBase
 {
     RepositorioCaixa repositorioCaixa;
     private RepositorioRevista repositorioRevista;
-    private TelaCaixa telaCaixa;
 
-    public TelaRevista(RepositorioRevista repositorioRevista, TelaCaixa telaCaixa, RepositorioCaixa repositorioCaixa) : base("Revista", repositorioRevista)
+    public TelaRevista(RepositorioRevista repositorioRevista, RepositorioCaixa repositorioCaixa) : base("Revista", repositorioRevista)
     {
         this.repositorioRevista = repositorioRevista;
-        this.telaCaixa = telaCaixa;
         this.repositorioCaixa = repositorioCaixa;
-        this.telaCaixa = telaCaixa;
     }
 
     //=====================================================================
@@ -63,14 +60,65 @@ public class TelaRevista : TelaBase
         Console.Write("Data de publicação: ");
         dataPublicacao = Console.ReadLine() ?? string.Empty;
 
-        telaCaixa.VisualizarTodos(false);
-        Console.Write("ID da caixa: ");
-        string idCaixa = Console.ReadLine() ?? string.Empty;
+
+        string idCaixa = SelecionarCaixa();
 
         EntidadeBase? caixaSelecionada = repositorioCaixa.SelecionarPorId(idCaixa);
 
         Caixa caixa = (Caixa?)caixaSelecionada;
 
         return new Revista(titulo, numeroEdicao, dataPublicacao, caixa);
+    }
+    private string SelecionarCaixa()
+    {
+        Console.WriteLine("---------------------------------");
+
+        Console.WriteLine(
+          "{0, -7} | {1, -20} | {2, -10} | {3, -20}",
+          "Id", "Etiqueta", "Cor", "Tempo de Empréstimo"
+      );
+
+        EntidadeBase?[] caixas = repositorioCaixa.SelecionarTodos();
+
+        for (int i = 0; i < caixas.Length; i++)
+        {
+            Caixa? c = (Caixa?)caixas[i];
+
+            if (c == null)
+                continue;
+
+            string corSelecionada = c.Cor;
+
+            if (corSelecionada == "Vermelho")
+                Console.ForegroundColor = ConsoleColor.Red;
+
+            else if (corSelecionada == "Verde")
+                Console.ForegroundColor = ConsoleColor.Green;
+
+            else if (corSelecionada == "Azul")
+                Console.ForegroundColor = ConsoleColor.Blue;
+
+            Console.WriteLine(
+                "{0, -7} | {1, -20} | {2, -10} | {3, -20}",
+                c.Id, c.Etiqueta, c.Cor, c.DiasEmprestimo
+            );
+        }
+
+        Console.ResetColor();
+
+        Console.WriteLine("---------------------------------");
+
+        string? idSelecionado;
+
+        do
+        {
+            Console.Write("Digite o ID da caixa em que deseja guardar a revista: ");
+            idSelecionado = Console.ReadLine();
+
+            if (!string.IsNullOrWhiteSpace(idSelecionado) && idSelecionado.Length == 7)
+                break;
+        } while (true);
+
+        return idSelecionado;
     }
 }
