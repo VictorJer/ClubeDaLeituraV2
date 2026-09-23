@@ -14,4 +14,9 @@ public class RepositorioEmprestimo
             }
         }
     }
+
+    public Emprestimo?[] SelecionarTodos()
+    {
+        return emprestimos;
+    }
 }

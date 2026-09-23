@@ -46,6 +46,11 @@ public class Emprestimo
         Amigo.AddEmprestimo(this);
     }
 
+    public bool EstaAtrasado()
+    {
+        return Status == StatusEmprestimo.Aberto && DateTime.Now > DataDevolucao;
+    }
+
     public string[] Validar()
     {
         string erros = string.Empty;

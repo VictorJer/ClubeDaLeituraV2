@@ -146,7 +146,7 @@ while (true)
 
                 case ("3")
                     :
-                    telaEmprestimo.VisualizarTodos();
+                    telaEmprestimo.VisualizarTodos(continuar: true, exibirCabecalho: true);
                     break;
             }
         }

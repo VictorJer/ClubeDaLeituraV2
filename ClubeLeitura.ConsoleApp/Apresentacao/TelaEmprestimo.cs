@@ -56,6 +56,39 @@ public class TelaEmprestimo
         Console.ReadLine();
     }
 
+    public void VisualizarTodos(bool continuar, bool exibirCabecalho)
+    {
+        Console.Clear();
+        if (exibirCabecalho)
+        {
+            Console.WriteLine("Visualização de Empréstimos");
+            Console.WriteLine("---------------------------");
+        }
+
+        Console.WriteLine("{0,-7} | {1,-20} | {2,-20} | {3,-15} | {4,-15} | {5,-10}",
+                            "ID", "Amigo", "Revista", "Data Empréstimo", "Data Devolução", "Status");
+
+        Emprestimo?[] emprestimos = repositorioEmprestimo.SelecionarTodos();
+
+        for (int i = 0; i < emprestimos.Length; i++)
+        {
+            if (emprestimos[i] == null)
+                continue;
+
+            if (emprestimos[i] != null)
+            {
+                Console.WriteLine("{0,-7} | {1,-20} | {2,-20} | {3,-15} | {4,-15} | {5,-10}",
+                                    emprestimos[i].Id, emprestimos[i].Amigo.Nome, emprestimos[i].Revista.Titulo, emprestimos[i].DataEmprestimo.ToShortDateString(), emprestimos[i].DataDevolucao.ToShortDateString() ?? "", emprestimos[i].Status);
+            }
+        }
+
+        if (continuar)
+        {
+            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.ReadLine();
+        }
+    }
+
     private Emprestimo ObterDadosCadastrais()
     {
         Revista revista = SelecionarRevista();
@@ -137,8 +170,4 @@ public class TelaEmprestimo
         throw new NotImplementedException();
     }
 
-    internal void VisualizarTodos()
-    {
-        throw new NotImplementedException();
-    }
 }
