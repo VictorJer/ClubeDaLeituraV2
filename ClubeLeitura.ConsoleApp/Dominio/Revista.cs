@@ -3,12 +3,19 @@ using ClubeLeitura.ConsoleApp.Dominio.Base;
 
 namespace ClubeLeitura.ConsoleApp.Dominio;
 
+public enum StatusRevista
+{
+    Disponivel,
+    Emprestada
+}
+
 public class Revista : EntidadeBase
 {
     public string Titulo { get; set; } = string.Empty;
     public string NumeroEdicao { get; set; } = string.Empty;
     public string AnoPublicacao { get; set; } = string.Empty;
     public Caixa Caixa { get; set; }
+    public StatusRevista Status { get; set; }
 
     public Revista(string titulo, string numeroEdicao, string anoPublicacao, Caixa caixa)
     {
@@ -16,6 +23,11 @@ public class Revista : EntidadeBase
         NumeroEdicao = numeroEdicao;
         AnoPublicacao = anoPublicacao;
         Caixa = caixa;
+    }
+
+    public void Emprestada()
+    {
+        Status = StatusRevista.Emprestada;
     }
 
     public override void Atualizar(EntidadeBase entidadeAtualizada)
@@ -49,4 +61,6 @@ public class Revista : EntidadeBase
 
         return erros.Split(";", StringSplitOptions.RemoveEmptyEntries);
     }
+
+
 }
