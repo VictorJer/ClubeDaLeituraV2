@@ -24,8 +24,8 @@ public class TelaRevista : TelaBase
     public override void VisualizarTodos(bool Continuar)
     {
         Console.Clear();
-        Console.WriteLine("{0,-10} | {1,-20} | {2,-15} | {3,-15} | {4,-10}",
-                        "ID", "Título", "Número Edição", "Ano Publicação", "Caixa");
+        Console.WriteLine("{0,-10} | {1,-20} | {2,-15} | {3,-15} | {4,-10} | {5,-10}",
+                        "ID", "Título", "Número Edição", "Ano Publicação", "Caixa", "Status");
 
         EntidadeBase?[] revistas = repositorioRevista.SelecionarTodos();
 
@@ -35,8 +35,8 @@ public class TelaRevista : TelaBase
 
             if (revistas[i] != null)
             {
-                Console.WriteLine("{0,-10} | {1,-20} | {2,-15} | {3,-15} | {4,-10}",
-                            revista.Id, revista.Titulo, revista.NumeroEdicao, revista.AnoPublicacao, revista.Caixa.Etiqueta);
+                Console.WriteLine("{0,-10} | {1,-20} | {2,-15} | {3,-15} | {4,-10} | {5,-10}",
+                            revista.Id, revista.Titulo, revista.NumeroEdicao, revista.AnoPublicacao, revista.Caixa.Etiqueta, revista.Status.ToString());
             }
         }
 

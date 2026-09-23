@@ -56,6 +56,11 @@ public class Emprestimo
         Amigo.AddEmprestimo(this);
     }
 
+    public void FecharEmprestimo()
+    {
+        Status = StatusEmprestimo.Fechado;
+        Revista.Devolver();
+    }
 
     public string[] Validar()
     {
@@ -69,4 +74,6 @@ public class Emprestimo
 
         return erros.Split(';', StringSplitOptions.RemoveEmptyEntries);
     }
+
+
 }

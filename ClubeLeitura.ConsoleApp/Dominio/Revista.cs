@@ -29,6 +29,10 @@ public class Revista : EntidadeBase
     {
         Status = StatusRevista.Emprestada;
     }
+    public void Devolver()
+    {
+        Status = StatusRevista.Disponivel;
+    }
 
     public override void Atualizar(EntidadeBase entidadeAtualizada)
     {

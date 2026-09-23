@@ -56,6 +56,33 @@ public class TelaEmprestimo
         Console.ReadLine();
     }
 
+    public void FecharEmprestimo()
+    {
+        Console.Clear();
+        Console.WriteLine("Fechamento de Empréstimos");
+        Console.WriteLine("-------------------------");
+        VisualizarTodos(continuar: false, exibirCabecalho: false);
+
+        do
+        {
+            Console.Write("Digite o ID do empréstimo que deseja fechar: ");
+            string idEmprestimo = Console.ReadLine() ?? string.Empty;
+
+            Emprestimo? emprestimoSelecionado = repositorioEmprestimo.SelecionarPorId(idEmprestimo);
+
+            if (emprestimoSelecionado != null)
+            {
+                emprestimoSelecionado.FecharEmprestimo();
+                Console.WriteLine("Empréstimo fechado com sucesso!");
+                Console.WriteLine("Pressione ENTER para continuar...");
+                Console.ReadLine();
+                return;
+            }
+
+            Console.WriteLine("Empréstimo não encontrado. Tente novamente.");
+        } while (true);
+    }
+
     public void VisualizarTodos(bool continuar, bool exibirCabecalho)
     {
         Console.Clear();
@@ -168,11 +195,6 @@ public class TelaEmprestimo
 
             Console.WriteLine("Amigo não encontrado. Tente novamente.");
         }
-    }
-
-    internal void FecharEmprestimo()
-    {
-        throw new NotImplementedException();
     }
 
 }
