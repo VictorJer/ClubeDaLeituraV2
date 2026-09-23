@@ -4,10 +4,12 @@ using ClubeLeitura.ConsoleApp.Intraestrutura;
 RepositorioAmigo repositorioAmigo = new RepositorioAmigo();
 RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
 RepositorioRevista repositorioRevista = new RepositorioRevista();
+RepositorioEmprestimo repositorioEmprestimo = new RepositorioEmprestimo();
 
 TelaCaixa telaCaixa = new TelaCaixa(repositorioCaixa);
 TelaRevista telaRevista = new TelaRevista(repositorioRevista, telaCaixa, repositorioCaixa);
 TelaAmigo telaAmigo = new TelaAmigo(repositorioAmigo);
+TelaEmprestimo telaEmprestimo = new TelaEmprestimo(repositorioEmprestimo, repositorioAmigo, repositorioRevista);
 
 while (true)
 {
@@ -126,7 +128,26 @@ while (true)
 
         else if (opcaoMenuPrincipal == "4")
         {
+            opcaoMenuInterno = telaEmprestimo.ObterOpcaoMenu();
 
+            if (opcaoMenuInterno == "S")
+                break;
+
+            switch (opcaoMenuInterno)
+            {
+                case ("1")
+                    :
+                    telaEmprestimo.AbrirEmprestimo();
+                    break;
+                case ("2")
+                    :
+                    telaEmprestimo.FecharEmprestimo();
+                    break;
+
+                case ("3")
+                    :
+                    telaEmprestimo.VisualizarTodos(true);
+                    break;
+            }
         }
     }
-}

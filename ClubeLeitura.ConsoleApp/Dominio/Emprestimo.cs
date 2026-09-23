@@ -25,7 +25,7 @@ public class Emprestimo
     public StatusEmprestimo Status { get; set; } = StatusEmprestimo.Aberto;
 
 
-    public Emprestimo(string id, Amigo amigo, Revista revista)
+    public Emprestimo(Amigo amigo, Revista revista)
     {
         Id = Convert
             .ToHexString(RandomNumberGenerator.GetBytes(20))
