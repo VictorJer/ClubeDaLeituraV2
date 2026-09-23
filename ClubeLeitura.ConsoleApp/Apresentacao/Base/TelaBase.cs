@@ -26,9 +26,9 @@ namespace ClubeLeitura.ConsoleApp.Apresentacao.Base
             Console.WriteLine("S - Sair");
             Console.WriteLine("---------------------------------");
             Console.Write("> ");
-            string? opcaoMenuPrincipal = Console.ReadLine()?.ToUpper();
+            string? opcaoMenuInterno = Console.ReadLine()?.ToUpper();
 
-            return opcaoMenuPrincipal;
+            return opcaoMenuInterno;
         }
         public void Cadastrar()
         {
