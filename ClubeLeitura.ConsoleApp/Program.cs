@@ -11,7 +11,7 @@ TelaPrincipal telaPrincipal = new TelaPrincipal(repositorioAmigo, repositorioCai
 
 while (true)
 {
-    TelaBase? telaSelecionada = telaPrincipal.ApresentarMenuPrincipal();
+    ITela? telaSelecionada = telaPrincipal.ApresentarMenuPrincipal();
 
     if (telaSelecionada == null)
     {
@@ -26,44 +26,50 @@ while (true)
         if (opcaoMenuInterno == "S")
             break;
 
-        if (opcaoMenuInterno == "1")
+        if (telaSelecionada is TelaBase)
         {
-            telaSelecionada.Cadastrar();
+            TelaBase? telaBase = (TelaBase?)telaSelecionada;
+
+            if (opcaoMenuInterno == "1")
+            {
+                telaBase.Cadastrar();
+            }
+            else if (opcaoMenuInterno == "2")
+            {
+                telaBase.Editar();
+            }
+            else if (opcaoMenuInterno == "3")
+            {
+                telaBase.Excluir();
+            }
+            else if (opcaoMenuInterno == "4")
+            {
+                telaBase.VisualizarTodos(true);
+            }
         }
-        else if (opcaoMenuInterno == "2")
+
+        else if (telaSelecionada is TelaEmprestimo)
         {
-            telaSelecionada.Editar();
+            TelaEmprestimo? telaEmprestimo = (TelaEmprestimo?)telaSelecionada;
+
+            opcaoMenuInterno = telaEmprestimo.ObterOpcaoMenu();
+
+            if (opcaoMenuInterno == "S")
+                break;
+
+            if (opcaoMenuInterno == "1")
+            {
+                telaEmprestimo.AbrirEmprestimo();
+            }
+            else if (opcaoMenuInterno == "2")
+            {
+                telaEmprestimo.FecharEmprestimo();
+            }
+            else if (opcaoMenuInterno == "3")
+            {
+                telaEmprestimo.VisualizarTodos(continuar: true, exibirCabecalho: true);
+            }
+
         }
-        else if (opcaoMenuInterno == "3")
-        {
-            telaSelecionada.Excluir();
-        }
-        else if (opcaoMenuInterno == "4")
-        {
-            telaSelecionada.VisualizarTodos(true);
-        }
-
-
-        // else if (opcaoMenuPrincipal == "4")
-        // {
-        //     opcaoMenuInterno = telaEmprestimo.ObterOpcaoMenu();
-
-        //     if (opcaoMenuInterno == "S")
-        //         break;
-
-        //     if (opcaoMenuInterno == "1")
-        //     {
-        //         telaEmprestimo.AbrirEmprestimo();
-        //     }
-        //     else if (opcaoMenuInterno == "2")
-        //     {
-        //         telaEmprestimo.FecharEmprestimo();
-        //     }
-        //     else if (opcaoMenuInterno == "3")
-        //     {
-        //         telaEmprestimo.VisualizarTodos(continuar: true, exibirCabecalho: true);
-        //     }
-
-        // }
     }
 }

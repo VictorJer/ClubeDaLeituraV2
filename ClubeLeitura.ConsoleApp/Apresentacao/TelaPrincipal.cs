@@ -18,7 +18,7 @@ public class TelaPrincipal
         this.repositorioEmprestimo = repositorioEmprestimo;
     }
 
-    public TelaBase? ApresentarMenuPrincipal()
+    public ITela? ApresentarMenuPrincipal()
     {
         Console.Clear();
         Console.WriteLine("---------------------------------");
