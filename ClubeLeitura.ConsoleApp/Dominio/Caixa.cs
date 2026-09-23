@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using ClubeLeitura.ConsoleApp.Dominio.Base;
 
 namespace ClubeLeitura.ConsoleApp.Dominio;
 

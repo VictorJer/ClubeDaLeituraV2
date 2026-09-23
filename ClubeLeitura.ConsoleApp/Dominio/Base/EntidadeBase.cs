@@ -1,6 +1,6 @@
 using System.Security.Cryptography;
 
-namespace ClubeLeitura.ConsoleApp.Dominio;
+namespace ClubeLeitura.ConsoleApp.Dominio.Base;
 
 public abstract class EntidadeBase
 {
