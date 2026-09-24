@@ -28,6 +28,7 @@ public class Multa
         Emprestimo = emprestimo;
         DiasDeAtraso = emprestimo.ObterQuantidadeDiasAtraso(dataConclusaoEmprestimo);
         DataOcorrencia = DateTime.Now;
+        Status = StatusMulta.Ativa;
     }
 
     public void Quitar()

@@ -63,6 +63,18 @@ public class Amigo : EntidadeBase
         }
     }
 
+    public void AddMulta(Multa multa)
+    {
+        for (int i = 0; i < Multas.Length; i++)
+        {
+            if (Multas[i] == null)
+            {
+                Multas[i] = multa;
+                break;
+            }
+        }
+    }
+
     public override void Atualizar(EntidadeBase entidadeAtualizada)
     {
         Amigo amigoAtualizado = (Amigo)entidadeAtualizada;

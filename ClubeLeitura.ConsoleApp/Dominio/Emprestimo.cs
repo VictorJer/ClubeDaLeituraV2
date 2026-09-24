@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using ClubeDaLeitura.ConsoleApp.Dominio;
 using ClubeLeitura.ConsoleApp.Dominio.Base;
 
 namespace ClubeLeitura.ConsoleApp.Dominio;
@@ -58,6 +59,17 @@ public class Emprestimo
 
     public void FecharEmprestimo()
     {
+        if (Status != StatusEmprestimo.Aberto)
+            return;
+
+        DateTime dataConclusao = DateTime.Now;
+
+        if (dataConclusao > DataDevolucaoPrevista)
+        {
+            Multa multa = new Multa(this, dataConclusao);
+            Amigo.AddMulta(multa);
+        }
+
         Status = StatusEmprestimo.Fechado;
         Revista.Devolver();
     }
