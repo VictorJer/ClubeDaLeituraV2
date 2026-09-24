@@ -6,8 +6,9 @@ RepositorioAmigo repositorioAmigo = new RepositorioAmigo();
 RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
 RepositorioRevista repositorioRevista = new RepositorioRevista();
 RepositorioEmprestimo repositorioEmprestimo = new RepositorioEmprestimo();
+RepositorioReserva repositorioReserva = new RepositorioReserva();
 
-TelaPrincipal telaPrincipal = new TelaPrincipal(repositorioAmigo, repositorioCaixa, repositorioRevista, repositorioEmprestimo);
+TelaPrincipal telaPrincipal = new TelaPrincipal(repositorioAmigo, repositorioCaixa, repositorioRevista, repositorioEmprestimo, repositorioReserva);
 
 while (true)
 {
@@ -26,10 +27,8 @@ while (true)
         if (opcaoMenuInterno == "S")
             break;
 
-        if (telaSelecionada is TelaBase)
+        if (telaSelecionada is TelaBase telaBase)
         {
-            TelaBase? telaBase = (TelaBase?)telaSelecionada;
-
             if (opcaoMenuInterno == "1")
             {
                 telaBase.Cadastrar();
@@ -48,15 +47,8 @@ while (true)
             }
         }
 
-        else if (telaSelecionada is TelaEmprestimo)
+        else if (telaSelecionada is TelaEmprestimo telaEmprestimo)
         {
-            TelaEmprestimo? telaEmprestimo = (TelaEmprestimo?)telaSelecionada;
-
-            opcaoMenuInterno = telaEmprestimo.ObterOpcaoMenu();
-
-            if (opcaoMenuInterno == "S")
-                break;
-
             if (opcaoMenuInterno == "1")
             {
                 telaEmprestimo.AbrirEmprestimo();
@@ -72,15 +64,8 @@ while (true)
 
         }
 
-        else if (telaSelecionada is TelaReserva)
+        else if (telaSelecionada is TelaReserva telaReserva)
         {
-            TelaReserva? telaReserva = (TelaReserva?)telaSelecionada;
-
-            opcaoMenuInterno = telaReserva.ObterOpcaoMenu();
-
-            if (opcaoMenuInterno == "S")
-                break;
-
             if (opcaoMenuInterno == "1")
             {
                 telaReserva.Iniciar();

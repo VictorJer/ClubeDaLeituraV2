@@ -17,7 +17,7 @@ public class TelaEmprestimo : ITela
         this.repositorioAmigo = repositorioAmigo;
         this.repositorioRevista = repositorioRevista;
     }
-    public string ObterOpcaoMenu()
+    public string? ObterOpcaoMenu()
     {
         Console.Clear();
         Console.WriteLine("---------------------------------");
@@ -142,7 +142,7 @@ public class TelaEmprestimo : ITela
         {
             Revista? revista = (Revista?)revistas[i];
 
-            if (revistas[i] != null)
+            if (revista != null && revista.Status == StatusRevista.Disponivel)
             {
                 Console.WriteLine("{0,-10} | {1,-20} | {2,-15} | {3,-15} | {4,-10}",
                             revista.Id, revista.Titulo, revista.NumeroEdicao, revista.AnoPublicacao, revista.Caixa.Etiqueta);
@@ -160,7 +160,7 @@ public class TelaEmprestimo : ITela
             if (revistaSelecionada != null)
                 return (Revista)revistaSelecionada;
 
-            Console.WriteLine("Revista não encontrada. Tente novamente.");
+            Console.WriteLine("Revista não encontrada ou indisponível. Tente novamente.");
         }
     }
 

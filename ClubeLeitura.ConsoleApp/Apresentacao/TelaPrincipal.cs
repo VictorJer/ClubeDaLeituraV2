@@ -11,7 +11,7 @@ public class TelaPrincipal
     private RepositorioEmprestimo repositorioEmprestimo;
     private RepositorioReserva repositorioReserva;
 
-    public TelaPrincipal(RepositorioAmigo repositorioAmigo, RepositorioCaixa repositorioCaixa, RepositorioRevista repositorioRevista, RepositorioEmprestimo repositorioEmprestimo, RepositorioReserva repositorioReserva = null)
+    public TelaPrincipal(RepositorioAmigo repositorioAmigo, RepositorioCaixa repositorioCaixa, RepositorioRevista repositorioRevista, RepositorioEmprestimo repositorioEmprestimo, RepositorioReserva repositorioReserva)
     {
         this.repositorioAmigo = repositorioAmigo;
         this.repositorioCaixa = repositorioCaixa;
@@ -30,6 +30,7 @@ public class TelaPrincipal
         Console.WriteLine("2 - Gerenciar revistas");
         Console.WriteLine("3 - Gerenciar amigos");
         Console.WriteLine("4 - Gerenciar empréstimos");
+        Console.WriteLine("5 - Gerenciar reservas");
         Console.WriteLine("S - Sair");
         Console.WriteLine("---------------------------------");
         Console.Write("> ");
