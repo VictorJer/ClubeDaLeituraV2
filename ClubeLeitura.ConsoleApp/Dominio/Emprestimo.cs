@@ -15,7 +15,7 @@ public class Emprestimo
     public Amigo Amigo { get; set; }
     public Revista Revista { get; set; }
     public DateTime DataEmprestimo { get; set; }
-    public DateTime DataDevolucao
+    public DateTime DataDevolucaoPrevista
     {
         get
         {
@@ -26,7 +26,7 @@ public class Emprestimo
     {
         get
         {
-            if (Status == StatusEmprestimo.Aberto && DateTime.Now > DataDevolucao)
+            if (Status == StatusEmprestimo.Aberto && DateTime.Now > DataDevolucaoPrevista)
                 return true;
 
             return false;
@@ -77,6 +77,6 @@ public class Emprestimo
 
     public int ObterQuantidadeDiasAtraso(DateTime dataConclusaoEmprestimo)
     {
-        return (dataConclusaoEmprestimo - DataDevolucao).Days;
+        return (dataConclusaoEmprestimo - DataDevolucaoPrevista).Days;
     }
 }

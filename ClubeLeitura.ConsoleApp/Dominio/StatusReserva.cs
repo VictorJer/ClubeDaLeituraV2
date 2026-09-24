@@ -1,7 +1,8 @@
 namespace ClubeDaLeitura.ConsoleApp.Dominio;
 
-public enum StatusMulta
+public enum StatusReserva
 {
+    Indefinido,
     Ativa,
-    Quitada
+    Concluida
 }

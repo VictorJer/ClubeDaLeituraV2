@@ -9,13 +9,15 @@ public class TelaPrincipal
     private RepositorioCaixa repositorioCaixa;
     private RepositorioRevista repositorioRevista;
     private RepositorioEmprestimo repositorioEmprestimo;
+    private RepositorioReserva repositorioReserva;
 
-    public TelaPrincipal(RepositorioAmigo repositorioAmigo, RepositorioCaixa repositorioCaixa, RepositorioRevista repositorioRevista, RepositorioEmprestimo repositorioEmprestimo)
+    public TelaPrincipal(RepositorioAmigo repositorioAmigo, RepositorioCaixa repositorioCaixa, RepositorioRevista repositorioRevista, RepositorioEmprestimo repositorioEmprestimo, RepositorioReserva repositorioReserva = null)
     {
         this.repositorioAmigo = repositorioAmigo;
         this.repositorioCaixa = repositorioCaixa;
         this.repositorioRevista = repositorioRevista;
         this.repositorioEmprestimo = repositorioEmprestimo;
+        this.repositorioReserva = repositorioReserva;
     }
 
     public ITela? ApresentarMenuPrincipal()
@@ -41,6 +43,12 @@ public class TelaPrincipal
 
         else if (opcaoMenuPrincipal == "3")
             return new TelaAmigo(repositorioAmigo);
+
+        else if (opcaoMenuPrincipal == "4")
+            return new TelaEmprestimo(repositorioEmprestimo, repositorioAmigo, repositorioRevista);
+
+        else if (opcaoMenuPrincipal == "5")
+            return new TelaReserva(repositorioRevista, repositorioReserva, repositorioAmigo);
 
         return null;
     }

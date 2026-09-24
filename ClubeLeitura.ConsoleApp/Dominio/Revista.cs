@@ -3,12 +3,6 @@ using ClubeLeitura.ConsoleApp.Dominio.Base;
 
 namespace ClubeLeitura.ConsoleApp.Dominio;
 
-public enum StatusRevista
-{
-    Disponivel,
-    Emprestada
-}
-
 public class Revista : EntidadeBase
 {
     public string Titulo { get; set; } = string.Empty;
@@ -24,7 +18,10 @@ public class Revista : EntidadeBase
         AnoPublicacao = anoPublicacao;
         Caixa = caixa;
     }
-
+    public void Reservar()
+    {
+        Status = StatusRevista.Reservada;
+    }
     public void Emprestada()
     {
         Status = StatusRevista.Emprestada;
