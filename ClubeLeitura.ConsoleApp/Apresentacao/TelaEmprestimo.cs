@@ -111,7 +111,7 @@ public class TelaEmprestimo : ITela
                 }
 
                 Console.WriteLine("{0,-7} | {1,-20} | {2,-20} | {3,-15} | {4,-15} | {5,-10}",
-                                    emprestimos[i].Id, emprestimos[i].Amigo.Nome, emprestimos[i].Revista.Titulo, emprestimos[i].DataEmprestimo.ToShortDateString(), emprestimos[i].DataDevolucao.ToShortDateString() ?? "", emprestimos[i].Status);
+                                    emprestimos[i].Id, emprestimos[i].Amigo.Nome, emprestimos[i].Revista.Titulo, emprestimos[i].DataEmprestimo.ToShortDateString(), emprestimos[i].DataDevolucaoPrevista.ToShortDateString() ?? "", emprestimos[i].Status);
             }
         }
 

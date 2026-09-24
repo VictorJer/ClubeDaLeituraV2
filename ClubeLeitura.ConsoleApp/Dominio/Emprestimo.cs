@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using ClubeDaLeitura.ConsoleApp.Dominio;
 using ClubeLeitura.ConsoleApp.Dominio.Base;
 
 namespace ClubeLeitura.ConsoleApp.Dominio;
@@ -15,7 +16,7 @@ public class Emprestimo
     public Amigo Amigo { get; set; }
     public Revista Revista { get; set; }
     public DateTime DataEmprestimo { get; set; }
-    public DateTime DataDevolucao
+    public DateTime DataDevolucaoPrevista
     {
         get
         {
@@ -26,7 +27,7 @@ public class Emprestimo
     {
         get
         {
-            if (Status == StatusEmprestimo.Aberto && DateTime.Now > DataDevolucao)
+            if (Status == StatusEmprestimo.Aberto && DateTime.Now > DataDevolucaoPrevista)
                 return true;
 
             return false;
@@ -58,6 +59,17 @@ public class Emprestimo
 
     public void FecharEmprestimo()
     {
+        if (Status != StatusEmprestimo.Aberto)
+            return;
+
+        DateTime dataConclusao = DateTime.Now;
+
+        if (dataConclusao > DataDevolucaoPrevista)
+        {
+            Multa multa = new Multa(this, dataConclusao);
+            Amigo.AddMulta(multa);
+        }
+
         Status = StatusEmprestimo.Fechado;
         Revista.Devolver();
     }
@@ -75,5 +87,8 @@ public class Emprestimo
         return erros.Split(';', StringSplitOptions.RemoveEmptyEntries);
     }
 
-
+    public int ObterQuantidadeDiasAtraso(DateTime dataConclusaoEmprestimo)
+    {
+        return (dataConclusaoEmprestimo - DataDevolucaoPrevista).Days;
+    }
 }

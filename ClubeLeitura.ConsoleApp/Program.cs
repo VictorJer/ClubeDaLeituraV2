@@ -71,5 +71,30 @@ while (true)
             }
 
         }
+
+        else if (telaSelecionada is TelaReserva)
+        {
+            TelaReserva? telaReserva = (TelaReserva?)telaSelecionada;
+
+            opcaoMenuInterno = telaReserva.ObterOpcaoMenu();
+
+            if (opcaoMenuInterno == "S")
+                break;
+
+            if (opcaoMenuInterno == "1")
+            {
+                telaReserva.Iniciar();
+            }
+
+            else if (opcaoMenuInterno == "2")
+            {
+                telaReserva.Concluir();
+            }
+
+            else if (opcaoMenuInterno == "3")
+            {
+                telaReserva.VisualizarTodos(deveExibirCabecalho: true);
+            }
+        }
     }
 }

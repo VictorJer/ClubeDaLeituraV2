@@ -1,3 +1,4 @@
+using ClubeDaLeitura.ConsoleApp.Dominio;
 using ClubeLeitura.ConsoleApp.Apresentacao.Base;
 using ClubeLeitura.ConsoleApp.Dominio;
 using ClubeLeitura.ConsoleApp.Dominio.Base;
@@ -68,5 +69,65 @@ public class TelaAmigo : TelaBase
         nomeResponsavel = Console.ReadLine() ?? string.Empty;
 
         return new Amigo(nome, telefone, nomeResponsavel);
+    }
+
+    public void VisualizarMultas()
+    {
+        Amigo? amigoSelecionado = null;
+
+        do
+        {
+            Console.WriteLine("Visualização de Multas de Amigo");
+            Console.WriteLine("---------------------------------");
+
+
+            VisualizarTodos(Continuar: false);
+
+            Console.WriteLine("---------------------------------");
+
+            string? idSelecionado;
+
+            Console.Write("Digite o ID do registro que deseja visualizar (ou S para sair): ");
+            idSelecionado = Console.ReadLine() ?? string.Empty;
+
+            if (idSelecionado.ToUpper() == "S")
+                return;
+
+            if (!string.IsNullOrWhiteSpace(idSelecionado) && idSelecionado.Length == 7)
+                amigoSelecionado = (Amigo?)repositorioAmigo.SelecionarPorId(idSelecionado);
+
+            if (amigoSelecionado != null)
+                break;
+        } while (true);
+
+        Console.WriteLine("---------------------------------");
+
+        Console.WriteLine(
+            "{0, -7} | {1, -12} | {2, -7} | {3, -20} | {4, -10}",
+            "Id", "Ocorrência", "Valor", "Revista", "Status"
+        );
+
+        Multa?[] multas = amigoSelecionado.Multas;
+
+        for (int i = 0; i < multas.Length; i++)
+        {
+            Multa? m = multas[i];
+
+            if (m == null)
+                continue;
+
+            Console.WriteLine(
+                "{0, -7} | {1, -12} | {2, -7} | {3, -20} | {4, -10}",
+                m.Id,
+                m.DataOcorrencia.ToShortDateString(),
+                m.Valor.ToString("C2"),
+                m.Emprestimo.Revista.Titulo,
+                m.Status
+            );
+        }
+
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine("Digite ENTER para continuar...");
+        Console.ReadLine();
     }
 }
