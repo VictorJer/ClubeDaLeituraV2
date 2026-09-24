@@ -75,5 +75,8 @@ public class Emprestimo
         return erros.Split(';', StringSplitOptions.RemoveEmptyEntries);
     }
 
-
+    public int ObterQuantidadeDiasAtraso(DateTime dataConclusaoEmprestimo)
+    {
+        return (dataConclusaoEmprestimo - DataDevolucao).Days;
+    }
 }
